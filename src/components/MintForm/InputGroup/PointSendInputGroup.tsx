@@ -70,6 +70,8 @@ function PointSendInputGroup({
           onChange={(e) => {
             isSuccess && register('point').onChange(e);
             setAverageScore(averageNumFromLocal + Number(getValues()?.point));
+            // setAverageScore((averageNumFromLocal * 3 + Number(getValues()?.point)) / 4);  // @나희
+
           }}
         />
       </label>

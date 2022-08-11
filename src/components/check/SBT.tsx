@@ -47,6 +47,7 @@ const Content = styled.a`
   letter-spacing: 0.001em;
   color: #ededed;
   margin-top: 2px;
+  word-break: break-all;
 `;
 
 const ProfileImage = styled.div`
