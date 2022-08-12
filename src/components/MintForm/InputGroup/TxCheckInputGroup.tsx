@@ -51,14 +51,10 @@ function TxCheckInputGroup({
     });
     const values = getValues();
 
-    console.log('>>values', values);
-
     const result = await checkTxValidation({
       transactionId: values?.transactionId,
       targetAddress: values?.targetAddress,
     });
-
-    console.log('>>>result', result);
 
     setError('targetAddress', {
       type: 'manual',
@@ -77,9 +73,11 @@ function TxCheckInputGroup({
 
       setIsSuccess(true);
 
+      const allReceivedTokenCount = await mintContract.balanceOf(values?.targetAddress);
       const allCount = await mintContract.balanceOf(values?.targetAddress);
       const allScore = await mintContract.reputationScoreOf(values?.targetAddress);
 
+      localStorage.setItem('allReceivedToken', JSON.stringify(allReceivedTokenCount.toNumber()));
       if (allCount.toNumber() === 0) {
         setAverageScore(0);
         localStorage.setItem('averageScore', JSON.stringify(0));

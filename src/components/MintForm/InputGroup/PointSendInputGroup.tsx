@@ -9,7 +9,7 @@ import {
   flexColumn,
   h1Regular,
 } from '@src/styles';
-import React, { Dispatch, SetStateAction, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 interface PointSendInputGroupProps {
@@ -34,9 +34,15 @@ function PointSendInputGroup({
   } = useFormContext();
 
   const value = getValues();
+
   const averageNumFromLocal =
     typeof window !== 'undefined' && Number(localStorage.getItem('averageScore'));
+  const allReceivedTokenCount =
+    typeof window !== 'undefined' && Number(localStorage.getItem('allReceivedToken'));
 
+  useEffect(() => {
+    console.log('>>averageNumFromLocal', averageNumFromLocal);
+  }, []);
   console.log('>>value', value);
 
   return (
@@ -69,7 +75,11 @@ function PointSendInputGroup({
           {...register('point')}
           onChange={(e) => {
             isSuccess && register('point').onChange(e);
-            setAverageScore((averageNumFromLocal as number) + Number(getValues()?.point));
+            setAverageScore(
+              ((averageNumFromLocal as number) * (allReceivedTokenCount as number) +
+                Number(getValues()?.point)) /
+                ((allReceivedTokenCount as number) + 1),
+            );
           }}
         />
       </label>
