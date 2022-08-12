@@ -10,9 +10,9 @@ function Navbar() {
   const router = useRouter();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
 
-  useEffect(() => {
-    getAccounts();
-  }, [ownerAddress]);
+  // useEffect(() => {
+  //   getAccounts();
+  // }, [ownerAddress]);
 
   const handleClick = () => {
     router.push('/');

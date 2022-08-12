@@ -3,7 +3,7 @@ export const connectMetamask = async () => {
     const { ethereum } = window;
 
     if (!ethereum) {
-      alert('Get MetaMask!');
+      alert('install metamask first!');
 
       return;
     }

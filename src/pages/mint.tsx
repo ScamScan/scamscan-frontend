@@ -21,11 +21,11 @@ function mint() {
       setStatus('LOADING');
       setIsSubmit(true);
       if (typeof window !== undefined) {
-        const from = localStorage.getItem('targetAddress');
-        const to = localStorage.getItem('ownerAddress');
+        const from = localStorage.getItem('ownerAddress');
+        const to = localStorage.getItem('targetAddress');
         const score = Number(localStorage.getItem('point'));
         const transactionId = localStorage.getItem('transactionId');
-        const reason = localStorage.getItem('ownerAddress');
+        const reason = localStorage.getItem('reason');
         const matic = Number(localStorage.getItem('matic'));
 
         console.log('>>최종값', from, to, score, transactionId, reason, matic);
