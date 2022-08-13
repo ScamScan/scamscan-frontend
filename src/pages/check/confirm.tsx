@@ -63,7 +63,7 @@ const TabTitles = styled.button<tabTitleProps>`
 
 function Confirm() {
   const router = useRouter();
-  const [score, setScore] = useState(' ');
+  const [score, setScore] = useState<number>(0);
   // const [address, setAddress] = useState<string | undefined>(router?.query?.checkAddress);
   const [tabName, setTabName] = useState('Reputation');
   const [contract, setContract] = useState(getCheckContract());
@@ -207,7 +207,8 @@ function Confirm() {
 
     console.log('>>scoreData', result);
 
-    if (totalNumber.toNumber() != 0) setScore(result?.toNumber() / totalNumber.toNumber());
+    if (totalNumber.toNumber() != 0 && result)
+      setScore(result.toNumber() / totalNumber?.toNumber());
     else setScore(0);
   };
 
