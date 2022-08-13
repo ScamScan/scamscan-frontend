@@ -11,7 +11,11 @@ export const checkWalletConnected = async () => {
       method: 'eth_accounts',
     })) as Array<string>;
 
-    localStorage.setItem('ownerAddress', accounts[0]);
+    if (accounts[0]) {
+      localStorage.setItem('ownerAddress', accounts[0]);
+    } else {
+      alert('Make polygon accounts first🥲');
+    }
 
     return accounts[0];
   } catch (error) {

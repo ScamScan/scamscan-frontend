@@ -10,9 +10,11 @@ function Navbar() {
   const router = useRouter();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
 
-  // useEffect(() => {
-  //   getAccounts();
-  // }, [ownerAddress]);
+  useEffect(() => {
+    const addressInLocal = typeof window !== undefined && localStorage.getItem('ownerAddress');
+
+    setOwnerAddress(addressInLocal);
+  }, []);
 
   const handleClick = () => {
     router.push('/');

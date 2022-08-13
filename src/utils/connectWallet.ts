@@ -9,7 +9,11 @@ export const connectMetamask = async () => {
     }
     const accounts = (await ethereum.request({ method: 'eth_requestAccounts' })) as Array<string>;
 
-    localStorage.setItem('ownerAddress', accounts[0]);
+    if (accounts[0]) {
+      localStorage.setItem('ownerAddress', accounts[0]);
+    } else {
+      alert('Make polygon accounts first🥲');
+    }
     console.log('Connected', accounts[0]);
 
     return accounts[0];
