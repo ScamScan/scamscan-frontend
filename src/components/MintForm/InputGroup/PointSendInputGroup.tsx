@@ -55,14 +55,26 @@ function PointSendInputGroup({
           htmlFor="radio-1"
           className="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
         >
-          <input type="radio" value="good" className="radio" {...register('reputation')} />
+          <input
+            type="radio"
+            value="good"
+            className="radio"
+            {...register('reputation')}
+            disabled={!isSuccess}
+          />
           Send Good Reputation
         </label>
         <label
           htmlFor="radio-1"
           className="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
         >
-          <input className="radio" type="radio" value="bad" {...register('reputation')} />
+          <input
+            className="radio"
+            type="radio"
+            value="bad"
+            {...register('reputation')}
+            disabled={!isSuccess}
+          />
           Send Bad Reputation
         </label>
       </StCheckBoxGroup>
@@ -81,6 +93,7 @@ function PointSendInputGroup({
                 ((allReceivedTokenCount as number) + 1),
             );
           }}
+          disabled={!isSuccess}
         />
       </label>
       <label htmlFor="reason">
@@ -90,6 +103,7 @@ function PointSendInputGroup({
           placeholder="Selected the Reason"
           className="input w-full h-[54px] mt-[11px] mb-[40px]"
           {...register('reason')}
+          disabled={!isSuccess}
         />
       </label>
       <label htmlFor="mintCost">Mint Cost</label>

@@ -104,17 +104,6 @@ function MintForm({ setIsToast, setIsSubmit }: MintFormProps) {
             burnedMatic={burnedMatic}
           />
         )}
-        {/* <StModalWrapper>
-          <Modal
-            modalId="connectWallet"
-            _onClick={handleModalClick}
-            btnText="Connect Wallet"
-            modalTitle="Connect Wallet"
-            modalContent="Please connect your wallet to continue"
-            modalBtn="MetaMask"
-            className="Modal__style"
-          />
-        </StModalWrapper> */}
         <Button type="submit">Send Reputation</Button>
       </form>
     </FormProvider>
