@@ -47,6 +47,7 @@ const StRoot = styled.section`
   background: #202020;
   border-radius: 20px;
   ${flexColumn}
+  justify-content: center;
 `;
 
 const StTitle = styled.h2`

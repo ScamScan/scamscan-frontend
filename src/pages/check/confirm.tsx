@@ -63,7 +63,7 @@ const TabTitles = styled.button<tabTitleProps>`
 
 function Confirm() {
   const router = useRouter();
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState<number>(0);
   // const [address, setAddress] = useState<string | undefined>(router?.query?.checkAddress);
   const [tabName, setTabName] = useState('Reputation');
   const [contract, setContract] = useState(getCheckContract());
@@ -123,7 +123,7 @@ function Confirm() {
   const parseSentToken = (token: any) => {
     const score = token.score.toNumber();
     const reason = token.reportTypeCode;
-    const address = token.from;
+    const address = token.to;
     const addressTitle = 'Receiver';
     const date = getFormattedDate(token.blockTimestamp.toNumber());
     const transactionID = token.relatedTransactionHash._hex;
@@ -207,7 +207,8 @@ function Confirm() {
 
     console.log('>>scoreData', result);
 
-    if (totalNumber.toNumber() != 0) setScore(result?.toNumber() / totalNumber.toNumber());
+    if (totalNumber.toNumber() != 0 && result)
+      setScore(result.toNumber() / totalNumber?.toNumber());
     else setScore(0);
   };
 
@@ -230,9 +231,9 @@ function Confirm() {
     <StyledRoot>
       <CheckHeader />
       <Profile address={router?.query?.checkAddress as string} />
-      <StyledScore>{score}</StyledScore>
+      <StyledScore>{Math.round(score * 1000) / 1000}</StyledScore>
       <div className="mt-[40px]">
-        <ScoreBar score={score} />
+        <ScoreBar score={Math.round(score * 1000) / 1000} />
       </div>
       <DashboardContainer>
         <TabTitles

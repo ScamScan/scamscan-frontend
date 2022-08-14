@@ -214,6 +214,11 @@ export const ContractAbi = [
             type: 'address',
           },
           {
+            internalType: 'address',
+            name: 'to',
+            type: 'address',
+          },
+          {
             internalType: 'int256',
             name: 'score',
             type: 'int256',
@@ -286,6 +291,11 @@ export const ContractAbi = [
           {
             internalType: 'address',
             name: 'from',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'to',
             type: 'address',
           },
           {

@@ -8,11 +8,13 @@ import React, { useEffect, useState } from 'react';
 
 function Navbar() {
   const router = useRouter();
-  const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
+  const [ownerAddress, setOwnerAddress] = useState<string>('');
 
   useEffect(() => {
-    getAccounts();
-  }, [ownerAddress]);
+    const addressInLocal = typeof window !== undefined && localStorage.getItem('ownerAddress');
+
+    addressInLocal && setOwnerAddress(addressInLocal as string);
+  }, []);
 
   const handleClick = () => {
     router.push('/');
@@ -24,16 +26,10 @@ function Navbar() {
     ownerAddress.length,
   );
 
-  const getAccounts = async () => {
-    const metamaskAccounts = await checkWalletConnected();
-
-    setOwnerAddress(metamaskAccounts);
-  };
-
   const handleWalletClick = async () => {
     const metamaskAccounts = await connectMetamask();
 
-    setOwnerAddress(metamaskAccounts);
+    metamaskAccounts && setOwnerAddress(metamaskAccounts);
   };
 
   const menus = [

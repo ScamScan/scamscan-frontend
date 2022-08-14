@@ -71,7 +71,7 @@ const StyledSubmitButton = styled.button`
 `;
 
 function Check() {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('0xDe264e2133963c9f40e07f290E1D852f7e4e4c7c');
   const router = useRouter();
   const handleClick = () => {
     if (address)
@@ -101,6 +101,8 @@ function Check() {
           placeholder="Wallet address or contract address"
           className="input w-[464px] text-[16px] h-[54px] bg-transparent p-[16px] border border-[#2F2F2F] rounded-2xl placeholder-[#6A6A6A] text-white font-normal mt-[11px] bg-[#181818]"
           onChange={(e) => setAddress(e.target.value)}
+          defaultValue="0xDe264e2133963c9f40e07f290E1D852f7e4e4c7c
+          "
         />
       </StyledAddressContainer>
       <div>

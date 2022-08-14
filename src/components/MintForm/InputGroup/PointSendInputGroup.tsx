@@ -9,7 +9,7 @@ import {
   flexColumn,
   h1Regular,
 } from '@src/styles';
-import React, { Dispatch, SetStateAction, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 interface PointSendInputGroupProps {
@@ -34,9 +34,15 @@ function PointSendInputGroup({
   } = useFormContext();
 
   const value = getValues();
+
   const averageNumFromLocal =
     typeof window !== 'undefined' && Number(localStorage.getItem('averageScore'));
+  const allReceivedTokenCount =
+    typeof window !== 'undefined' && Number(localStorage.getItem('allReceivedToken'));
 
+  useEffect(() => {
+    console.log('>>averageNumFromLocal', averageNumFromLocal);
+  }, []);
   console.log('>>value', value);
 
   return (
@@ -49,14 +55,26 @@ function PointSendInputGroup({
           htmlFor="radio-1"
           className="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
         >
-          <input type="radio" value="good" className="radio" {...register('reputation')} />
+          <input
+            type="radio"
+            value="good"
+            className="radio"
+            {...register('reputation')}
+            disabled={!isSuccess}
+          />
           Send Good Reputation
         </label>
         <label
           htmlFor="radio-1"
           className="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300"
         >
-          <input className="radio" type="radio" value="bad" {...register('reputation')} />
+          <input
+            className="radio"
+            type="radio"
+            value="bad"
+            {...register('reputation')}
+            disabled={!isSuccess}
+          />
           Send Bad Reputation
         </label>
       </StCheckBoxGroup>
@@ -69,8 +87,13 @@ function PointSendInputGroup({
           {...register('point')}
           onChange={(e) => {
             isSuccess && register('point').onChange(e);
-            setAverageScore((averageNumFromLocal as number) + Number(getValues()?.point));
+            setAverageScore(
+              ((averageNumFromLocal as number) * (allReceivedTokenCount as number) +
+                Number(getValues()?.point)) /
+                ((allReceivedTokenCount as number) + 1),
+            );
           }}
+          disabled={!isSuccess}
         />
       </label>
       <label htmlFor="reason">
@@ -80,6 +103,7 @@ function PointSendInputGroup({
           placeholder="Selected the Reason"
           className="input w-full h-[54px] mt-[11px] mb-[40px]"
           {...register('reason')}
+          disabled={!isSuccess}
         />
       </label>
       <label htmlFor="mintCost">Mint Cost</label>

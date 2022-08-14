@@ -13,9 +13,15 @@ import React, { useEffect, useState } from 'react';
 const Home: NextPage = () => {
   const router = useRouter();
   const handleClick = () => {
+    const owner = typeof window !== undefined && localStorage.getItem('ownerAddress');
+
+    if (!owner) {
+      alert('Connect your metamask first!');
+
+      return;
+    }
     router.push('/mint');
   };
-  const [isToast, setIsToast] = useState<boolean>();
 
   return (
     <Styled.Page className="bg-[url('../assets/background/main.png')] bg-cover bg-bottom">
@@ -34,7 +40,7 @@ const Home: NextPage = () => {
           Protect your precious assets.
         </p>
         <div className="m-auto  mb-12">
-          <Button _onClick={() => router.push('/mint')}>Mint</Button>
+          <Button _onClick={handleClick}>Mint</Button>
         </div>
       </div>
     </Styled.Page>
