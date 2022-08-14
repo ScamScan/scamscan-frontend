@@ -71,7 +71,7 @@ const StyledSubmitButton = styled.button`
 `;
 
 function Check() {
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('0xDe264e2133963c9f40e07f290E1D852f7e4e4c7c');
   const router = useRouter();
   const handleClick = () => {
     if (address)
